@@ -1,0 +1,3 @@
+[submodule "sample2/seed_r7_ros_pkg"]
+	path = sample2/seed_r7_ros_pkg
+	url = https://github.com/seed-solutions/seed_r7_ros_pkg/
