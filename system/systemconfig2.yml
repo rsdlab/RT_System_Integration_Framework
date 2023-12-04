@@ -1,0 +1,19 @@
+collect:
+  rtm:
+   - Destination_gui
+  apt:
+   - ros-noetic-moveit
+   - ros-noetic-navigation
+  git:
+   - https://github.com/seed-solutions/seed_smartactuator_sdk.git
+
+
+
+run:
+  rosrun:
+   - rviz rviz
+   -  seed_r7_navigation Movetest.py
+  roslaunch:
+   - seed_r7_bringup seed_r7_bringup.launch
+   - roslaunch seed_r7_navigation wheel_with_static_map.launch
+
