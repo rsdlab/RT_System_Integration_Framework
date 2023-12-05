@@ -6,12 +6,22 @@
 * 本フレームワークではシステム構築の工程を必要なモジュールの収集，システム構築，システム運用に分け，ミドルウェアの違いを意識させない運用を実現している．
 
 # 開発環境
-* 開発言語	Python
-* OS	Ubuntu20.04
-* ミドルウェア	ROS noetic
-* RTミドルウェア	OpenRTM-aist-2.0
+* 開発言語:Python
+* OS:Linux(Ubuntu20.04)
+* ROS: ROS noetic
+* RTミドルウェア:OpenRTM-aist-2.0
 
 #　サンプルシステム
 *　[MobileRobotControl](https://github.com/rsdlab/MobileRobotSystem.git)を使用したジョイスティックシステム
-* [Destinaiton_gui]（https://github.com/KatoMisa/Destinaion_gui.git）を使用したナビゲーションシステム
-ロボットはいずれもTHK(社)のSEED-Moverを使用．
+* [Destinaiton_gui](https://github.com/KatoMisa/Destinaion_gui.git)を使用したナビゲーションシステム
+* ロボットはいずれもTHK(社)のSEED-Moverを使用．
+
+# ドキュメント
+**マニュアル**
+* 準備中
+
+**その他**
+* プレゼンテーション動画・・・準備中
+* RTMコンテストプレゼン資料・・・準備中
+* 一部のモジュールに不具合があるため調整中
+
