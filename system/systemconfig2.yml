@@ -13,8 +13,8 @@ collect:
 run:
   rosrun:
    - rviz rviz
-   -  seed_r7_navigation Movetest.py
+   - seed_r7_navigation Movetest.py
   roslaunch:
    - seed_r7_bringup seed_r7_bringup.launch
-   - roslaunch seed_r7_navigation wheel_with_static_map.launch
+   - seed_r7_navigation wheel_with_static_map.launch
 
