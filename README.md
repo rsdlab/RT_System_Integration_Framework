@@ -14,7 +14,7 @@
 
 # サンプルシステム
 * [MobileRobotControl](https://github.com/rsdlab/MobileRobotControl.git)を使用したジョイスティックシステム
-* [Destinaiton_gui](https://github.com/KatoMisa/Destinaion_gui.git)を使用したナビゲーションシステム
+* [Destinaiton_gui](https://github.com/KatoMisa/Destination_gui.git)を使用したナビゲーションシステム
 * ロボットはいずれもTHK(社)のSEED-Moverを使用．
 
 # ドキュメント
