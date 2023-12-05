@@ -1,6 +1,5 @@
-# osrfが提供するrosイメージ（タグがnoetic-desktop-full）をベースとしてダウンロード
+
 FROM osrf/ros:noetic-desktop-full
-# Docker実行してシェルに入ったときの初期ディレクトリ（ワークディレクトリ）の設定
 
 RUN apt update && apt install -y curl python3 python3-pip git python-is-python3 wget emacs 
 
@@ -36,5 +35,4 @@ RUN mkdir workspace && cd workspace && git clone https://github.com/rsdlab/wasan
 RUN pip install pyqtspinner
 
 COPY  system system/ 
-COPY  sample2 catkin_ws/src/.
 

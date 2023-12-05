@@ -1,0 +1,30 @@
+- pose:
+    position:
+        x: 0.3
+        y: 0
+        z: 0
+    orientation:
+        x: 0
+        y: 0
+        z: 0
+        w: 1.00
+- pose:
+    position:
+        x: 1.00
+        y: -0.44
+        z: 0
+    orientation:
+        x: 0
+        y: 0
+        z: 0
+        w: 1.00
+- pose:
+    position:
+        x: 1.8
+        y: 0.67
+        z: 0
+    orientation:
+        x: 0
+        y: 0
+        z: 0
+        w: 1.00
