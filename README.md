@@ -20,7 +20,7 @@
 
 # ドキュメント
 **マニュアル**
-* 準備中
+* [Manual.pdf](https://github.com/KatoMisa/RT_System_Integration_Framework/blob/main/Manual.pdf)に記載
 
 **その他**
 * プレゼンテーション動画・・・準備中
