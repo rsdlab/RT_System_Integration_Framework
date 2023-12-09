@@ -13,6 +13,9 @@
 * ROS: ROS noetic
 * RTミドルウェア:OpenRTM-aist-2.0
 
+# 再利用したフレームワーク
+* [wasanbon](http://wasanbon.org/)
+
 # サンプルシステム
 * [MobileRobotControl](https://github.com/rsdlab/MobileRobotControl.git)を使用したジョイスティックシステム
 * [Destinaiton_gui](https://github.com/KatoMisa/Destination_gui.git)を使用したナビゲーションシステム
@@ -25,5 +28,6 @@
 **その他**
 * プレゼンテーション動画・・・準備中
 * RTMコンテストプレゼン資料・・・準備中
-* 一部のモジュールに不具合があるため調整中
+* Ubuntu20.04のネイティブな環境で使用した場合は動作確認済
+* Dockerを使用した場合一部のモジュールに不具合があるため調整中
 
