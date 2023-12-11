@@ -1,4 +1,3 @@
-
 FROM osrf/ros:noetic-desktop-full
 
 RUN apt update && apt install -y curl python3 python3-pip git python-is-python3 wget emacs 
