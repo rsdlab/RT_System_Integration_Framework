@@ -126,7 +126,8 @@ def collect():
 
  ######### ros package #####################
     subprocess.run("pwd")#workspace
-    os.chdir('/home/rsdlab/catkin_ws/src')
+    os.chdir(os.environ['HOME'])
+    os.chdir('catkin_ws/src')
     leng_g = config['collect']['git']
 
     if leng_g is None:
@@ -156,7 +157,7 @@ def collect():
         print("move system file")     #ナビゲーション用のファイルを入れる
         move_file()
     else:
-        print("sss")
+        print("move file for navigation")
     
  ######### add package ######################
     dec = config['collect']['rtm'][0]
@@ -165,7 +166,7 @@ def collect():
         print("install sfml")          #SFMLライブラリを入れる
         sfml()
     else:
-        print("sss")
+        print("not install sfml")
     
 
 
@@ -199,11 +200,12 @@ def build():
  ######### Build  ros package #####################
     print("Build ROS package")
     print("catkin make")
-    os.chdir("/home/rsdlab/catkin_ws")
+    os.chdir(os.environ['HOME'])
+    os.chdir('catkin_ws')
     #subprocess.run("catkin_make") 
     subprocess.call(["catkin", "build"]) 
     print("source devel/setup.bash")
-    subprocess.call("source /home/rsdlab/catkin_ws/devel/setup.bash",shell=True,executable = BASH) 
+    subprocess.call("source ~/catkin_ws/devel/setup.bash",shell=True,executable = BASH) 
     subprocess.run("pwd")
 
  #########Build rtm package #####################
@@ -211,7 +213,8 @@ def build():
     length_rtm = len(leng_rtm)
     for i in range(length_rtm):
         was_rep1 = config['collect']['rtm'][i]
-        os.chdir('/home/rsdlab/workspace/{}'.format(was_rep1))
+        os.chdir(os.environ['HOME'])
+        os.chdir('workspace/{}'.format(was_rep1))
         subprocess.run("pwd")
         print('Package build {}'.format(was_rep1))
         call(['./mgr.py', 'rtc', 'build', 'all','-v'])
@@ -263,8 +266,8 @@ def run():
 
 
     was_rep1  = config['collect']['rtm'][0]
-    subprocess.run("pwd")
-    os.chdir('/home/rsdlab/workspace/{}'.format(was_rep1))
+    os.chdir(os.environ['HOME'])
+    os.chdir('workspace/{}'.format(was_rep1))
     subprocess.run("pwd")
     subprocess.run(['ls'])
     p=Popen(["./mgr.py", "system", "run","-v"])
