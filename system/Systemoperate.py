@@ -6,6 +6,9 @@
 #===================================================================================================================#
 #===================================================================================================================#
 #このノードはLinux(Ubuntu20.04)でのみ利用可能です．
+#なお，ROS及びOpenRTMのワークスペースを以下に設定している．
+# ROS: ROS_WS=${HOME}/catkin_ws
+# RTM: RTM_WS=${HOME}/workspace
 #===================================================================================================================#
 
 import yaml
@@ -19,7 +22,8 @@ import shutil
 import re
 
 BASH = '/bin/bash'
-
+ros_ws = os.environ["ROS_WS"]
+rtm_ws = os.environ["RTM_WS"]
 
 args = sys.argv
 with open(args[1] , 'r') as yml:
@@ -28,8 +32,9 @@ with open(args[1] , 'r') as yml:
  ######### sfml package (by editor)######################
 def sfml():
     print("install sfml")
-    os.chdir(os.environ['HOME'])
-    os.chdir('workspace')
+    os.chdir(rtm_ws)
+    # os.chdir(os.environ['HOME'])
+    # os.chdir('workspace')
     ser_sfml = './SFML-2.4.2-linux-gcc-64-bit.tar.gz'
     if os.path.isfile(ser_sfml):
         print("SFML File exit already")
@@ -55,13 +60,17 @@ def sfml():
 ################# Option (by editor) ##############################
 def move_file(): 
     print("move file")  
-    os.chdir(os.environ['HOME'])
-    os.chdir('catkin_ws/src/seed_r7_ros_pkg')
+    os.chdir(ros_ws)
+    os.chdir('src/seed_r7_ros_pkg')
+    # os.chdir(os.environ['HOME'])
+    # os.chdir('catkin_ws/src/seed_r7_ros_pkg')
     print("git checkout") 
     subprocess.Popen(['git', 'checkout', 'e2d40c2edca6931f0b7d2457ad860474272772fe'])
     
-    os.chdir(os.environ['HOME'])
-    os.chdir('catkin_ws/src/seed_r7_ros_pkg/seed_r7_navigation/maps') 
+    os.chdir(ros_ws)
+    os.chdir('src/seed_r7_ros_pkg/seed_r7_navigation/maps')
+    # os.chdir(os.environ['HOME'])
+    # os.chdir('catkin_ws/src/seed_r7_ros_pkg/seed_r7_navigation/maps') 
     ser_map1 = './map.yaml'
     ser_map2 = './map.pgm'
 
@@ -89,8 +98,9 @@ def move_file():
 
 def collect():
  ######### wasanbon repository #####################    
-    os.chdir(os.environ['HOME'])
-    os.chdir('workspace')
+    os.chdir(rtm_ws)
+    # os.chdir(os.environ['HOME'])
+    # os.chdir('workspace')
     subprocess.run("pwd")
     leng_rtm = config['collect']['rtm']
     print(leng_rtm)
@@ -135,9 +145,11 @@ def collect():
     
 
  ######### ros package #####################
-    subprocess.run("pwd")#workspace
-    os.chdir(os.environ['HOME'])
-    os.chdir('catkin_ws/src')
+    # subprocess.run("pwd")#workspace
+    dir_name = f"{ros_ws}/src" 
+    os.chdir(dir_name)
+    # os.chdir(os.environ['HOME'])
+    # os.chdir('catkin_ws/src')
     leng_g = config['collect']['git']
 
     if leng_g is None:
@@ -202,16 +214,18 @@ def build():
     
     dep_b = config['collect']['git'][0]['repo']
     if (re.search('seed', dep_b)):
-        os.chdir(os.environ['HOME'])
-        os.chdir('catkin_ws')     
+        os.chdir(ros_ws)
+        # os.chdir(os.environ['HOME'])
+        # os.chdir('catkin_ws')     
         subprocess.run(["rosdep", "install", "-y", "-r", "--from-paths", "src", "--ignore-src"])
     else:
         print("ddd")
  ######### Build  ros package #####################
     print("Build ROS package")
-    print("catkin make")
-    os.chdir(os.environ['HOME'])
-    os.chdir('catkin_ws')
+    print("catkin build")
+    os.chdir(ros_ws)
+    # os.chdir(os.environ['HOME'])
+    # os.chdir('catkin_ws')
     #subprocess.run("catkin_make") 
     subprocess.call(["catkin", "build"]) 
     print("source devel/setup.bash")
@@ -223,8 +237,10 @@ def build():
     length_rtm = len(leng_rtm)
     for i in range(length_rtm):
         was_rep1 = config['collect']['rtm'][i]
-        os.chdir(os.environ['HOME'])
-        os.chdir('workspace/{}'.format(was_rep1))
+        dir_name = f"{rtm_ws}/{was_rep1}" 
+        os.chdir(dir_name)
+        # os.chdir(os.environ['HOME'])
+        # os.chdir('workspace/{}'.format(was_rep1))
         subprocess.run("pwd")
         print('Package build {}'.format(was_rep1))
         call(['./mgr.py', 'rtc', 'build', 'all','-v'])
@@ -276,8 +292,10 @@ def run():
 
 
     was_rep1  = config['collect']['rtm'][0]
-    os.chdir(os.environ['HOME'])
-    os.chdir('workspace/{}'.format(was_rep1))
+    dir_name = f"{rtm_ws}/{was_rep1}" 
+    os.chdir(dir_name)
+    # os.chdir(os.environ['HOME'])
+    # os.chdir('workspace/{}'.format(was_rep1))
     subprocess.run("pwd")
     subprocess.run(['ls'])
     p=Popen(["./mgr.py", "system", "run","-v"])
