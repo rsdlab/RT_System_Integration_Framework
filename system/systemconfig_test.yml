@@ -1,0 +1,19 @@
+collect:
+  rtm:
+   - MobileRobotControl
+  apt:
+   - ros-noetic-moveit
+   - ros-noetic-navigation
+  git:
+   - url: https://github.com/seed-solutions
+     repo: seed_smartactuator_sdk
+   - url: https://github.com/seed-solutions
+     repo: seed_r7_ros_pkg
+
+
+
+run:
+  rosrun:
+   - 
+  roslaunch:
+   - seed_r7_bringup moveit.launch

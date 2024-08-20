@@ -8,12 +8,22 @@ from PyQt5.QtCore import Qt, QThread, pyqtSignal,QTimer
 from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QPushButton,QVBoxLayout, QGroupBox, QRadioButton,QLabel
 from pyqtspinner.spinner import WaitingSpinner
 
+#pip install pyqtspinner
+
+f_dir = "/home/rsdlab/RT_System_Integration_Framework/system"
+s_ope = "/home/rsdlab/RT_System_Integration_Framework/system/Systemoperate.py"
+conf1 = "/home/rsdlab/RT_System_Integration_Framework/system/systemconfig1.yml"
+conf2 = "/home/rsdlab/RT_System_Integration_Framework/system/systemconfig2.yml"
+name1 = "Sample System1"
+name2 = "Sample system2"
+
+
 class WorkerThread1(QThread):
    finished = pyqtSignal(int)
    def run(self):
        try:
            subprocess.run('pwd')
-           command1 = ["python3",  "/home/rsdlab/system/Systemoperate.py", "/home/rsdlab/system/systemconfig1.yml", "collect"]
+           command1 = ["python3",  s_ope, conf1, "collect"]
            result = subprocess.Popen(command1)
            returncode = result.returncode
            self.finished.emit(returncode)
@@ -24,7 +34,7 @@ class WorkerThread2(QThread):
    def run(self):
        try:
            subprocess.run('pwd')
-           command4 = ["python3", "/home/rsdlab/system/Systemoperate.py", "/home/rsdlab/system/systemconfig2.yml", "collect"]
+           command4 = ["python3", s_ope, conf2, "collect"]
            result = subprocess.Popen(command4)      
            returncode = result.returncode
            self.finished.emit(returncode)
@@ -35,7 +45,7 @@ class WorkerThread3(QThread):
    def run(self):
        try:
            subprocess.run('pwd')
-           command2 = ["python3",  "/home/rsdlab/system/Systemoperate.py", "/home/rsdlab/system/systemconfig1.yml", "build"]
+           command2 = ["python3",  s_ope, conf1, "build"]
            result = subprocess.Popen(command2)
            returncode = result.returncode
            self.finished.emit(returncode)
@@ -46,7 +56,7 @@ class WorkerThread4(QThread):
    def run(self):
        try:
            subprocess.run('pwd')
-           command5 = ["python3",  "/home/rsdlab/system/Systemoperate.py", "/home/rsdlab/system/systemconfig2.yml", "build"]
+           command5 = ["python3",  s_ope, conf2, "build"]
            result = subprocess.Popen(command5)
            returncode = result.returncode
            self.finished.emit(returncode)
@@ -65,8 +75,8 @@ class MainWindow(QWidget):
        self.layout.addWidget(self.label9)
 
        self.group_box1 = QGroupBox("System")
-       self.radio_button1 = QRadioButton("Sample System 1")
-       self.radio_button2 = QRadioButton("Sample System 2")
+       self.radio_button1 = QRadioButton(name1)
+       self.radio_button2 = QRadioButton(name2)
        self.radio_button1.setChecked(True)
 
        self.group_box_layout1 = QVBoxLayout()
@@ -96,10 +106,10 @@ class MainWindow(QWidget):
        self.layout.addWidget(self.group_box2)
        self.layout.addWidget(self.button4)
 
-       self.label7=QLabel('System 1 動作可能')
+       self.label7=QLabel(f"{name1}動作可能")#f"{rtm_ws}/{was_rep1}" 
        self.label7.setAlignment(Qt.AlignCenter)
        self.layout.addWidget(self.label7)
-       self.label8=QLabel('System 2 動作可能')
+       self.label8=QLabel(f"{name2}動作可能")
        self.label8.setAlignment(Qt.AlignCenter)
        self.layout.addWidget(self.label8)
        self.label7.setVisible(False)
@@ -125,14 +135,14 @@ class MainWindow(QWidget):
        self.layout.addWidget(self.spinner)
        self.spinner.raise_()
        if self.radio_button1.isChecked()==True:
-         self.label1=QLabel('System 1 CollectModules...')
+         self.label1=QLabel(f'{name1} CollectModules...')
          self.label1.setAlignment(Qt.AlignCenter)
          self.layout.addWidget(self.label1)
          self.worker = WorkerThread1()
          self.worker.finished.connect(self.process_finished1)
          self.worker.start()
        else:
-         self.label2=QLabel('System 2 CollectModules...')
+         self.label2=QLabel(f'{name2}  CollectModules...')
          self.label2.setAlignment(Qt.AlignCenter)
          self.layout.addWidget(self.label2)
          self.worker = WorkerThread2()
@@ -153,14 +163,14 @@ class MainWindow(QWidget):
        self.spinner.raise_()
        self.layout.addWidget(self.spinner)
        if self.radio_button1.isChecked()==True:
-         self.label3=QLabel('System 1 SystemBuild...')
+         self.label3=QLabel(f'{name1}  SystemBuild...')
          self.label3.setAlignment(Qt.AlignCenter)
          self.layout.addWidget(self.label3)
          self.worker = WorkerThread3()
          self.worker.finished.connect(self.process_finished3)
          self.worker.start()
        else:
-         self.label4=QLabel('System 2 SystemBuild...')
+         self.label4=QLabel(f'{name2}  SystemBuild...')
          self.label4.setAlignment(Qt.AlignCenter)
          self.layout.addWidget(self.label4)
          self.worker = WorkerThread4()
@@ -180,25 +190,25 @@ class MainWindow(QWidget):
        self.layout.addWidget(self.spinner)
        if self.radio_button1.isChecked()==True:
          self.label7.setVisible(False)
-         self.label5=QLabel('System 1 SystemRun...')
+         self.label5=QLabel(f'{name1}  SystemRun...')
          self.label5.setAlignment(Qt.AlignCenter)
          self.layout.addWidget(self.label5)
          QTimer.singleShot(5000, self.stop_spinner5)
          subprocess.run('pwd')
-         command3 = ["python3", "/home/rsdlab/system/Systemoperate.py", "/home/rsdlab/system/systemconfig1.yml", "run"]
+         command3 = ["python3", s_ope, conf1, "run"]
          result = subprocess.Popen(command3)
        else:
          self.label8.setVisible(False)
-         self.label6=QLabel('System 2 SystemRun...')
+         self.label6=QLabel(f'{name2}  SystemRun...')
          self.label6.setAlignment(Qt.AlignCenter)
          self.layout.addWidget(self.label6)
          QTimer.singleShot(5000, self.stop_spinner6)
          subprocess.run('pwd')
-         command6 = ["python3", "/home/rsdlab/system/Systemoperate.py", "/home/rsdlab/system/systemconfig2.yml", "run"]
+         command6 = ["python3",s_ope, conf2, "run"]
          result = subprocess.Popen(command6)
 
    def start_process4(self):
-       os.chdir('/home/rsdlab/system/')
+       os.chdir(f_dir)
        subprocess.Popen(['./stop.sh'])
        self.label7.setVisible(False)
        self.label8.setVisible(False)
