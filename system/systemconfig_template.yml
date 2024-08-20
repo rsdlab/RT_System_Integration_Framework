@@ -1,0 +1,19 @@
+collect:
+  rtm:
+   - 
+  apt:
+   - 
+   - 
+  git:
+   - url: 
+     repo: 
+   - url: 
+     repo: 
+
+
+
+run:
+  rosrun:
+   - 
+  roslaunch:
+   - 
